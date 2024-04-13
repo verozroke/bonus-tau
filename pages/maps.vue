@@ -35,7 +35,6 @@ onMounted(async () => {
     )
 
     placeOnUserLocation()
-    clusterizeMarkers()
     // isLoading.value = false
   } catch (error) {
     // FIXME: add toast

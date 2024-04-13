@@ -9,3 +9,9 @@ export const CategoriesReverseMap = {
   'Медицина': 2,
   'Рестораны': 3
 }
+
+export const CategoriesCashbackPercentage = {
+  'Продукты': 5,
+  'Медицина': 5,
+  'Рестораны': 5
+}

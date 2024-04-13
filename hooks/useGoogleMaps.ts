@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { colors } from '~/core/color/color'
 import type { CashbackOfferCoordinatesType, Coordinates } from '~/core/types/map'
-import { CategoriesMap } from '~/core/constants/constants'
+import { CategoriesCashbackPercentage, CategoriesMap, CategoriesReverseMap } from '~/core/constants/constants'
 import { mapService } from './../services/map.service';
+import { routerKey } from 'vue-router';
 
 export function getMarkerIcon() {
   return `/marks/.png`
@@ -17,8 +18,6 @@ let service: window.google.maps.places.PlacesService;
 
 export function createCenterControl(
   map: any,
-  addMarkers: () => void,
-  clusterizeMarkers: () => void,
 ) {
   const controlButton = document.createElement('button')
 
@@ -48,9 +47,16 @@ export function createCenterControl(
 }
 // markersData?: CashbackOfferCoordinatesType[]
 
-function parseMarkers(queryResults: any): CashbackOfferCoordinatesType[] {
-  console.log(queryResults)
-  return queryResults
+function parseMarkers(queryResults: any, category: string): CashbackOfferCoordinatesType[] {
+  const parsedMarkers: CashbackOfferCoordinatesType[] = queryResults.map((location: any) => {
+    return {
+      cashback_percentage: CategoriesCashbackPercentage[category as keyof typeof CategoriesCashbackPercentage],
+      category_id: CategoriesReverseMap[category as keyof typeof CategoriesReverseMap],
+      lat: location.geometry.location.lat(),
+      lng: location.geometry.location.lng(),
+    }
+  })
+  return parsedMarkers
 }
 
 
@@ -78,7 +84,7 @@ export async function useGoogleMaps(
   // Create the DIV to hold the control.
   const centerControlDiv = document.createElement('div')
   // Create the control.
-  const centerControl = createCenterControl(map, addMarkers, clusterizeMarkers)
+  const centerControl = createCenterControl(map)
   // Append the control to the DIV.
   centerControlDiv.appendChild(centerControl)
   // @ts-expect-error cdn global object
@@ -138,21 +144,33 @@ export async function useGoogleMaps(
   }
 
 
-  getMarkers(map, CategoriesMap[1])
+  getMarkers(CategoriesMap[1])
 
   async function getMarkers(category: $FixMe) {
-    const request = {
-      query: category,
-      fields: ["name", "geometry"],
+    // @ts-expect-error cdn global object
+    var pyrmont = new window.google.maps.LatLng(51.08, 71.26);
+
+    var request = {
+      location: pyrmont,
+      radius: '5000',
+      query: 'restaurant'
     };
 
-    const results = await mapService.getMarkers()
+    // @ts-expect-error cdn global object
 
-    console.log(results)
-    addMarkers(parseMarkers(results))
+    service = new window.google.maps.places.PlacesService(map);
+    service.textSearch(request, callback);
 
-    return
+    function callback(results: any, status: any) {
+      // @ts-expect-error cdn global object
+      if (status == window.google.maps.places.PlacesServiceStatus.OK) {
+        addMarkers(parseMarkers(results, category))
+        clusterizeMarkers()
+      }
+    }
   }
+
+
 
 
   function addMarkers(markersData: CashbackOfferCoordinatesType[]) {
@@ -166,7 +184,9 @@ export async function useGoogleMaps(
       markerIcon.style.borderRadius = '50%'
       markerIcon.style.backgroundColor = colors.EMERALD
       markerIcon.style.padding = '4px'
+      markerIcon.style.fontSize = '16px'
       markerIcon.style.fontWeight = '700'
+      markerIcon.style.border = '2px solid white'
       markerIcon.style.color = colors.WHITE
       markerIcon.innerHTML = `
         <span>${mark.cashback_percentage}%</span>
@@ -211,9 +231,8 @@ export async function useGoogleMaps(
   }
 
 
-  // FIXME: make router push
   const goToOffer = (category_id: number) => {
-
+    window.location.pathname = '/recommendations/' + category_id
   }
 
   function clusterizeMarkers() {
