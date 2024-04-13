@@ -28,34 +28,34 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script
+  setup
+  lang="ts"
+>
 import { colors } from '~/core/color/color'
 import type { Card } from '~/core/types/card'
 
 const cards = ref<Card[]>([
   {
     id: 1,
-    card_number: '1234 5678 9012 3456',
-    expire_date: '12/24',
-    card_owner: 'John Doe',
-    bank: 'Halyk Bank',
-    user_id: '123'
+    number: '1234 5678 9012 3456',
+    usage_date: '12/24',
+    bank_title: 'Halyk Bank',
+    owner_id: 1
   },
   {
     id: 2,
-    card_number: '9876 5432 1098 7654',
-    expire_date: '05/23',
-    card_owner: 'Jane Smith',
-    bank: 'Jusan Bank',
-    user_id: '456'
+    number: '9876 5432 1098 7654',
+    usage_date: '05/23',
+    bank_title: 'Jusan Bank',
+    owner_id: 1
   },
   {
     id: 3,
-    card_number: '2468 1357 8024 6913',
-    expire_date: '09/25',
-    card_owner: 'Alice Johnson',
-    bank: 'Kaspi Bank',
-    user_id: '789'
+    number: '2468 1357 8024 6913',
+    usage_date: '09/25',
+    bank_title: 'Kaspi Bank',
+    owner_id: 1
   }
 ])
 
@@ -64,9 +64,17 @@ const isDialogOpen = ref(false)
 useHead({
   title: 'Мои карты | Bonastau'
 })
+
+const userStore = useUserStore()
+onMounted(async () => {
+  await userStore.getUser()
+})
 </script>
 
-<style lang="scss" scoped>
+<style
+  lang="scss"
+  scoped
+>
 .add-button {
   position: fixed;
   z-index: 999;

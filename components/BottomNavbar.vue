@@ -1,6 +1,6 @@
 <template>
-  <!-- v-if="userStore.isAuthenticated" -->
   <v-bottom-navigation
+    v-if="userStore.isAuthenticated"
     :color="colors.INDIGO"
     fixed
     grow
@@ -60,21 +60,28 @@
   </v-bottom-navigation>
 </template>
 
-<script setup lang="ts">
+<script
+  setup
+  lang="ts"
+>
 import { useRouter } from 'vue-router'
 import { colors } from '~/core/color/color'
+
+const userStore = useUserStore()
 
 const router = useRouter()
 const link = ref(
   window.location.pathname.split('/')[1]
     ? window.location.pathname.split('/')[1][0].toUpperCase() +
-        window.location.pathname.split('/')[1].substring(1)
+    window.location.pathname.split('/')[1].substring(1)
     : ''
 )
 
 const goToPage = (page: string) => {
   router.push('/' + page)
 }
+
+
 </script>
 
 <style scoped></style>

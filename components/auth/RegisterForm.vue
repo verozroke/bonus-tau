@@ -10,8 +10,7 @@
       <span
         @click="() => router.push('/login')"
         class="underline cursor-pointer underline-offset-2"
-        >Войти.</span
-      >
+      >Войти.</span>
     </h5>
     <div class="flex w-full flex-col py-4 gap-1">
       <UiInput
@@ -65,11 +64,18 @@
   </v-form>
 </template>
 
-<script setup lang="ts">
+<script
+  setup
+  lang="ts"
+>
 import { useRouter } from 'vue-router'
 import { colors } from '~/core/color/color'
+import { useToast } from '~/hooks/useToast';
+import { authService, type RegisterValidator } from '~/services/auth.service';
 
 const router = useRouter()
+const userStore = useUserStore()
+const { toast } = useToast()
 const registerForm = ref(null)
 const name = ref('')
 const surname = ref('')
@@ -88,7 +94,31 @@ const resetForm = () => {
   registerForm.value?.reset()
 }
 
-const onRegister = async () => {}
+const onRegister = async () => {
+  const body: RegisterValidator = {
+    phone: number.value,
+    password: password.value,
+    password2: repeatPassword.value,
+    name: name.value,
+    surname: surname.value
+  }
+
+  if (await isValid() && password.value === repeatPassword.value) {
+    try {
+      isLoading.value = true
+      const message = await authService.register(body)
+      isLoading.value = false
+      resetForm()
+      router.push('/login')
+      toast.success({ message })
+    } catch (e) {
+      isLoading.value = false
+      toast.error({ message: 'Не удалось зарегистрироваться.' })
+    }
+  } else {
+    toast.error({ message: 'Введите все поля корректно.' })
+  }
+}
 
 const commonRules = ref([(v: any) => !!v || 'Поле обязательно'])
 

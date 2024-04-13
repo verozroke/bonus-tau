@@ -12,17 +12,20 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script
+  setup
+  lang="ts"
+>
 import { onMounted, ref } from 'vue'
 import { useGoogleMaps } from '@/hooks/useGoogleMaps'
 import type { CashbackOfferCoordinatesType } from '~/core/types/map'
 import { mapService } from '@/services/map.service'
 // const isLoading = ref(false)
-// const userStore = useUserStore()
+const userStore = useUserStore()
 // const snackbarStore = useSnackbarStore()
 
 onMounted(async () => {
-  // await userStore.getUser()
+  await userStore.getUser()
   try {
     // isLoading.value = true
 

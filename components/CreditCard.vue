@@ -24,13 +24,14 @@
             {{ cardNumber }}
           </p>
         </div>
-        <p class="font-bold text-4xl">{{ card.bank }}</p>
+        <p class="font-bold text-4xl">{{ card.bank_title }}</p>
       </div>
       <div class="pt-4 pr-6 sm:pt-6">
         <div class="flex flex-wrap gap-10">
           <div>
             <p class="font-normal">Имя владельца</p>
-            <p class="font-semibold tracking-widest uppercase">{{ card.card_owner }}</p>
+            <p class="font-semibold tracking-widest uppercase">{{ toLatin(userStore.user!.surname +
+      userStore.user!.name) }}</p>
           </div>
           <div class="">
             <p class="text-base font-normal">Срок действия</p>
@@ -48,26 +49,31 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script
+  setup
+  lang="ts"
+>
 import { bankColorMap, bankTextColorMap } from '~/core/color/color'
 import type { Card } from '~/core/types/card'
+import { toLatin } from '~/core/utils'
 
+const userStore = useUserStore()
 const props = defineProps<{
   card: Card
 }>()
 
 const isDeleteDialogOpen = ref(false)
 
-const bankColor = computed(() => bankColorMap[props.card.bank as keyof typeof bankColorMap])
-const bankTextColor = computed(() => bankTextColorMap[props.card.bank as keyof typeof bankColorMap])
+const bankColor = computed(() => bankColorMap[props.card.bank_title as keyof typeof bankColorMap])
+const bankTextColor = computed(() => bankTextColorMap[props.card.bank_title as keyof typeof bankColorMap])
 
 const isCardNumberOpen = ref(false)
 const cardNumber = computed(() =>
-  isCardNumberOpen.value ? props.card.card_number : '**** ' + props.card.card_number.split(' ')[3]
+  isCardNumberOpen.value ? props.card.number : '**** ' + props.card.number.split(' ')[3]
 )
 
 const isExpireDateOpen = ref(false)
-const expireDate = computed(() => (isExpireDateOpen.value ? props.card.expire_date : '**/**'))
+const expireDate = computed(() => (isExpireDateOpen.value ? props.card.usage_date : '**/**'))
 </script>
 
 <style scoped></style>

@@ -64,6 +64,7 @@
                 <!-- userStore.user?.nickname ? userStore.user.nickname -->
                 {{ 'Такаев Асхат' }}
               </h3>
+              <LogoutButton />
             </div>
             <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
               <AccountSettings />
@@ -81,6 +82,10 @@
 >
 import { colors } from '~/core/color/color'
 
+const userStore = useUserStore()
+onMounted(async () => {
+  await userStore.getUser()
+})
 // const formattedCreatedAt = computed(() => formatDate(userStore.user ? userStore.user.createdAt : new Date()))
 
 // onMounted(async () => {
@@ -89,6 +94,8 @@ import { colors } from '~/core/color/color'
 useHead({
   title: 'Профиль | Bonastau'
 })
+
+
 </script>
 
 <style scoped></style>

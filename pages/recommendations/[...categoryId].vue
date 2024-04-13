@@ -4,13 +4,11 @@
       class="w-screen min-h-screen px-28 pt-12"
       style="background-color: #f1f5f9"
     >
-      <span class="text-3xl"
-        >Лучшие предложения для категории "{{
-          CategoriesMap[
-            parseInt(route.params.categoryId[0] as $FixMe) as keyof typeof CategoriesMap
-          ]
-        }}"</span
-      >
+      <span class="text-3xl">Лучшие предложения для категории "{{
+        CategoriesMap[
+        parseInt(route.params.categoryId[0] as $FixMe) as keyof typeof CategoriesMap
+        ]
+      }}"</span>
       <div class="flex flex-col gap-5 w-[910px] py-5">
         <CashbackOfferCard
           v-for="cashbackOffer in offers"
@@ -22,12 +20,16 @@
   </NuxtLayout>
 </template>
 
-<script setup lang="ts">
+<script
+  setup
+  lang="ts"
+>
 import { useRoute } from 'vue-router'
 import { CategoriesMap } from '~/core/constants/constants'
 import type { CashbackOffer } from '~/core/types/cashback-offer'
 
 const route = useRoute()
+const userStore = useUserStore()
 
 const offers = ref<CashbackOffer[]>([
   {
@@ -60,8 +62,8 @@ useHead({
   title: `${CategoriesMap[parseInt(route.params.categoryId[0] as $FixMe) as keyof typeof CategoriesMap]} | Bonastau`
 })
 
-onMounted(() => {
-  // getCashbackOffers()
+onMounted(async () => {
+  await userStore.getUser()
 })
 </script>
 
