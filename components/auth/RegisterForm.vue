@@ -1,5 +1,5 @@
 <template>
-  <form
+  <v-form
     ref="registerForm"
     @submit.prevent="async () => await onRegister()"
     class="flex flex-col w-[400px]"
@@ -58,7 +58,7 @@
         flick account.
       </UiButton>
     </div>
-  </form>
+  </v-form>
 </template>
 
 <script

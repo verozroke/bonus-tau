@@ -1,5 +1,5 @@
 export type Card = {
-  id: string
+  id: number
   card_number: string
   expire_date: string
   card_owner: string

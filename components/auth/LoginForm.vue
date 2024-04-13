@@ -1,5 +1,5 @@
 <template>
-  <form
+  <v-form
     ref="loginForm"
     @submit.prevent="async () => await onLogin()"
     class="flex flex-col w-[400px]"
@@ -40,7 +40,7 @@
       >Войти
       </UiButton>
     </div>
-  </form>
+  </v-form>
 </template>
 
 <script

@@ -1,11 +1,17 @@
 <template>
   <div
+    @click="isDeleteDialogOpen = true"
     class="relative h-[250px] w-100 rounded-md  py-8 shadow-md"
     :style="{
       backgroundColor: bankColor,
       color: bankTextColor
     }"
   >
+    <MyCardDeleteDialog
+      :id="card.id"
+      @close="isDeleteDialogOpen = false"
+      :isDeleteDialogOpen="isDeleteDialogOpen"
+    />
     <div class="flex flex-col justify-between h-full w-full px-8 sm:top-8">
       <div class="flex justify-between">
         <div>
@@ -42,6 +48,7 @@ const props = defineProps<{
   card: Card
 }>()
 
+const isDeleteDialogOpen = ref(false)
 
 const bankColor = computed(() => bankColorMap[props.card.bank as keyof typeof bankColorMap])
 const bankTextColor = computed(() => bankTextColorMap[props.card.bank as keyof typeof bankColorMap])

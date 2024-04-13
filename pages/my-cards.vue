@@ -1,11 +1,16 @@
 <template>
   <div class="cards">
     <v-btn
+      @click="isDialogOpen = true"
       icon="mdi-plus"
       class="text-white add-button"
       :color="colors.INDIGO"
     >
     </v-btn>
+    <MyCardDialog
+      @close="isDialogOpen = false"
+      :isDialogOpen="isDialogOpen"
+    />
     <div class="cards__title">Ваши карты</div>
     <transition-group
       tag="ul"
@@ -32,7 +37,7 @@ import type { Card } from '~/core/types/card';
 
 const cards = ref<Card[]>([
   {
-    id: "1",
+    id: 1,
     card_number: "1234 5678 9012 3456",
     expire_date: "12/24",
     card_owner: "John Doe",
@@ -40,7 +45,7 @@ const cards = ref<Card[]>([
     user_id: "123"
   },
   {
-    id: "2",
+    id: 2,
     card_number: "9876 5432 1098 7654",
     expire_date: "05/23",
     card_owner: "Jane Smith",
@@ -48,7 +53,7 @@ const cards = ref<Card[]>([
     user_id: "456"
   },
   {
-    id: "3",
+    id: 3,
     card_number: "2468 1357 8024 6913",
     expire_date: "09/25",
     card_owner: "Alice Johnson",
@@ -56,6 +61,9 @@ const cards = ref<Card[]>([
     user_id: "789"
   }
 ])
+
+const isDialogOpen = ref(false)
+
 
 </script>
 
