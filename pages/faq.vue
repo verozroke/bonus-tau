@@ -50,7 +50,9 @@ const questions = ref<Question[]>(
     },
   ]
 )
-
+useHead({
+  title: 'FAQ | Bonastau'
+})
 </script>
 
 <style

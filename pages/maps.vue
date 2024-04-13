@@ -41,6 +41,10 @@ onMounted(async () => {
     // isLoading.value = false
   }
 })
+
+useHead({
+  title: 'Ближайшие | Bonastau'
+})
 </script>
 
 <style scoped>

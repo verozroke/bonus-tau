@@ -64,7 +64,9 @@ const cards = ref<Card[]>([
 
 const isDialogOpen = ref(false)
 
-
+useHead({
+  title: 'Мои карты | Bonastau'
+})
 </script>
 
 <style

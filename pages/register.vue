@@ -11,6 +11,11 @@
   lang="ts"
 >
 
+
+useHead({
+  title: 'Регистрация | Bonastau'
+})
+
 </script>
 
 <style scoped></style>

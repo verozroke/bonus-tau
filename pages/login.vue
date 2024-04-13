@@ -14,6 +14,9 @@ import { useToast } from '~/hooks/useToast'
 
 const { toast } = useToast()
 
+useHead({
+  title: 'Вход | Bonastau'
+})
 
 </script>
 

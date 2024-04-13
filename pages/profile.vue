@@ -94,7 +94,9 @@ import { colors } from '~/core/color/color';
 // onMounted(async () => {
 // await userStore.getUser()
 // })
-
+useHead({
+  title: 'Профиль | Bonastau'
+})
 
 
 </script>
