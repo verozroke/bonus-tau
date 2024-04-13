@@ -29,5 +29,30 @@ export default defineNuxtConfig({
       ['defineStore', 'definePiniaStore'] // import { defineStore as definePiniaStore } from 'pinia'
     ]
   },
-  modules: ['@pinia/nuxt', '@nuxtjs/tailwindcss', '@vueuse/nuxt', '@nuxt/image']
+  pwa: {
+    manifest: {
+      "name": "BonusTau",
+      "short_name": "BonusTau",
+      "theme_color": "#2196f3",
+      "background_color": "#2196f3",
+      "display": "standalone",
+      "scope": "/",
+      "start_url": "/",
+      icons: [
+        {
+          src: '/logo-144.png',
+          sizes: '144x144',
+          type: 'image/png'
+        }
+      ]
+    },
+    workbox: {
+      navigateFallback: '/'
+    },
+    devOptions: {
+      enabled: true,
+      type: 'module'
+    }
+  },
+  modules: ['@vite-pwa/nuxt', '@pinia/nuxt', '@nuxtjs/tailwindcss', '@vueuse/nuxt', '@nuxt/image']
 })

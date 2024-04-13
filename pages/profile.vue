@@ -41,9 +41,7 @@
     </section>
     <section class="relative py-16 bg-blueGray-200">
       <div class="container mx-auto px-4">
-        <div
-          class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64"
-        >
+        <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
           <div class="px-6">
             <div class="flex flex-wrap justify-center">
               <div class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
@@ -66,11 +64,6 @@
                 <!-- userStore.user?.nickname ? userStore.user.nickname -->
                 {{ 'Такаев Асхат' }}
               </h3>
-              <div class="mb-2 text-blueGray-600">
-                <v-icon>mdi-clock-time-eight</v-icon>
-                <!-- formattedCreatedAt -->
-                Аккаунт создан: {{ '2024-02-02' }}
-              </div>
             </div>
             <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
               <AccountSettings />
@@ -82,7 +75,10 @@
   </main>
 </template>
 
-<script setup lang="ts">
+<script
+  setup
+  lang="ts"
+>
 import { colors } from '~/core/color/color'
 
 // const formattedCreatedAt = computed(() => formatDate(userStore.user ? userStore.user.createdAt : new Date()))
