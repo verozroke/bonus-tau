@@ -12,7 +12,6 @@ export default defineNuxtConfig({
     head: {
       link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
       script: [
-        // <script src="https://myawesome-lib.js"></script>
         {
           src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBAX1pmERCOfG1TewmZvOviBNt0b-Vsl0g&map_ids=2ee5bbffbf8f0060&libraries=places,visualization'
         },
@@ -33,15 +32,15 @@ export default defineNuxtConfig({
     manifest: {
       "name": "BonusTau",
       "short_name": "BonusTau",
-      "theme_color": "#2196f3",
-      "background_color": "#2196f3",
+      "theme_color": "#6366f1",
+      "background_color": "#6366f1",
       "display": "standalone",
       "scope": "/",
       "start_url": "/",
       icons: [
         {
-          src: '/logo-144.png',
-          sizes: '144x144',
+          src: '/logo-512.png',
+          sizes: '512x512',
           type: 'image/png'
         }
       ]
