@@ -17,3 +17,16 @@ export const notificationColors = {
   VIOLET: '#8b5cf6',
 }
 
+export const bankColorMap = {
+  'Halyk Bank': '#007c5c',
+  'Jusan Bank': '#e14b20',
+  'Kaspi Bank': '#e94433',
+}
+
+
+export const bankTextColorMap = {
+  'Halyk Bank': '#eea200',
+  'Jusan Bank': '#fff',
+  'Kaspi Bank': '#fff',
+}
+

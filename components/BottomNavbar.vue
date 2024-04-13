@@ -1,8 +1,8 @@
 <template>
   <!-- v-if="userStore.isAuthenticated" -->
   <v-bottom-navigation
-    color="indigo"
-    absolute
+    :color="colors.INDIGO"
+    fixed
     grow
     :elevation="5"
   >
@@ -40,7 +40,7 @@
       :active="link === 'my-cards'"
       value="my-cards"
       @click="goToPage('my-cards')"
-      prepend-icon="mdi-domain"
+      prepend-icon="mdi-credit-card"
       stacked
       variant="text"
     >
@@ -64,6 +64,7 @@
   lang="ts"
 >
 import { useRouter } from 'vue-router';
+import { colors } from '~/core/color/color';
 
 
 const router = useRouter()
