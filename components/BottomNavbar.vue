@@ -4,6 +4,7 @@
     :color="colors.INDIGO"
     fixed
     grow
+    bg-color="#f1f5f9"
     :elevation="5"
   >
     <v-btn

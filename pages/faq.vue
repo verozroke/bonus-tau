@@ -1,6 +1,6 @@
 <template>
   <div class="faq-body">
-    <div class="faq-body__title">FAQ</div>
+    <div class="faq-body__title mb-10">FAQ</div>
     <div class="faq-body__list">
       <v-expansion-panels>
         <v-expansion-panel
@@ -8,10 +8,12 @@
           v-for="item in questions"
           :key="item.id"
         >
-          <v-expansion-panel-title style="font-size: 24px; font-weight: bold">{{
+          <v-expansion-panel-title
+            style="font-size: 24px; font-weight: bold; padding: 25px 16px; background-color: #f1f5f9;"
+          >{{
             item.question
           }}</v-expansion-panel-title>
-          <v-expansion-panel-text style="padding: 20px 20px 10px 20px; font-size: 18px">
+          <v-expansion-panel-text style="padding: 20px 20px 10px 20px; font-size: 18px; background-color: #f1f5f9;">
             <span><b>Ответ:</b></span> <br />
             <br />
             {{ item.answer }}
@@ -60,8 +62,8 @@ const questions = ref<Question[]>(
   padding: 50px 70px;
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
   height: 100%;
+  background-color: #f1f4f9;
 
   &__title {
     font-size: 64px;

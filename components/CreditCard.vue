@@ -1,7 +1,7 @@
 <template>
   <div
-    @click="isDeleteDialogOpen = true"
-    class="relative h-[250px] w-100 rounded-md  py-8 shadow-md"
+    @click.self="isDeleteDialogOpen = true"
+    class="relative h-[250px] w-100 rounded-2xl  py-8 shadow-md"
     :style="{
       backgroundColor: bankColor,
       color: bankTextColor
@@ -16,7 +16,11 @@
       <div class="flex justify-between">
         <div>
           <p class="font-normal text-lg">Номер карты</p>
-          <p class="tracking-more-wider font-semibold text-4xl">{{ card.card_number }}</p>
+          <p
+            @click="isCardNumberOpen = !isCardNumberOpen"
+            v-ripple
+            class="tracking-more-wider font-semibold text-4xl"
+          >{{ cardNumber }}</p>
         </div>
         <p class="font-bold text-4xl">{{ card.bank }}</p>
       </div>
@@ -28,7 +32,11 @@
           </div>
           <div class="">
             <p class="text-base font-normal">Срок действия</p>
-            <p class="text-lg font-semibold tracking-widest">{{ card.expire_date }}</p>
+            <p
+              @click="isExpireDateOpen = !isExpireDateOpen"
+              v-ripple
+              class="text-lg font-semibold tracking-widest"
+            >{{ expireDate }}</p>
           </div>
         </div>
       </div>
@@ -52,6 +60,12 @@ const isDeleteDialogOpen = ref(false)
 
 const bankColor = computed(() => bankColorMap[props.card.bank as keyof typeof bankColorMap])
 const bankTextColor = computed(() => bankTextColorMap[props.card.bank as keyof typeof bankColorMap])
+
+const isCardNumberOpen = ref(false)
+const cardNumber = computed(() => isCardNumberOpen.value ? props.card.card_number : '**** ' + props.card.card_number.split(' ')[3])
+
+const isExpireDateOpen = ref(false)
+const expireDate = computed(() => isExpireDateOpen.value ? props.card.expire_date : '**/**')
 </script>
 
 <style scoped></style>

@@ -2,8 +2,9 @@
   <v-card
     class="mx-auto h-100"
     max-width="300"
+    color="#f8fafc"
   >
-    <v-list>
+    <v-list bg-color="#f8fafc">
       <v-list-subheader>Категории</v-list-subheader>
 
       <v-list-item
@@ -22,7 +23,7 @@
       </v-list-item>
     </v-list>
 
-    <v-list>
+    <v-list bg-color="#f8fafc">
       <v-list-subheader>Спонсоры</v-list-subheader>
 
       <v-list-item

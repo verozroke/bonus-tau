@@ -84,6 +84,7 @@ const isDialogOpen = ref(false)
   display: flex;
   flex-direction: column;
   height: 100%;
+  background-color: #f1f5f9;
 
   &__title {
     font-size: 64px;

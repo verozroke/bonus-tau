@@ -9,10 +9,7 @@
         @click="() => router.push('/register')"
         class="underline cursor-pointer underline-offset-2"
       >Создать аккаунт.</span></h5>
-    <span
-      ripple
-      class="text-sm text-slate-600 underline cursor-pointer underline-offset-2"
-    >Забыли пароль?</span>
+
     <div class="flex w-full flex-col py-4 gap-1">
       <UiInput
         label='Номер телефона'
@@ -30,10 +27,14 @@
         type="text"
       />
     </div>
+    <div class="flex justify-end w-full -mt-4"> <span
+        ripple
+        class="text-sm text-slate-600 underline cursor-pointer underline-offset-2"
+      >Забыли пароль?</span></div>
     <div class="flex justify-end">
       <UiButton
+        class="mt-3"
         type="submit"
-        class="-mt-4"
         mode='elevated'
         :color="colors.INDIGO"
         :text-color="colors.WHITE"

@@ -54,8 +54,8 @@
         mode='elevated'
         :color="colors.INDIGO"
         :text-color="colors.WHITE"
-      >create
-        flick account.
+      >
+        Зарегистрироваться
       </UiButton>
     </div>
   </v-form>
