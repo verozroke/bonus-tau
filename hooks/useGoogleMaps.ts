@@ -1,40 +1,24 @@
-import { useMapStore } from '@/stores/MapStore'
-import {
-  ratingTypes,
-  type Coordinates,
-  type ObjectCoordinatesType,
-  ratingColors,
-  ratingDescriptionMap,
-  ratingPercentages
-} from '@/types/Map'
-import { ObjectOfOrganizationOptionReverseMap, type RatingOption } from '@/types/ObjectBuilding'
 import axios from 'axios'
+import { colors } from '~/core/color/color'
+import type { CashbackOfferCoordinatesType, Coordinates } from '~/core/types/map'
+import { CategoriesMap } from '~/core/constants/constants'
+import { mapService } from './../services/map.service';
 
-export function getMarkerIcon(rating: RatingOption) {
-  return `/marks/rating-${rating}.png`
+export function getMarkerIcon() {
+  return `/marks/.png`
 }
 
 let markersToClusterize: any
 let cluster: any
-let heatmap: any
 let mappedData: any[]
+// @ts-expect-error cdn global object
+let service: window.google.maps.places.PlacesService;
 
-export function getMarkerTitle(rating: RatingOption) {
-  switch (rating) {
-    case '1':
-      return 'Safe'
-    case '2':
-      return 'Normal'
-    case '3':
-      return 'Danger'
-  }
-}
 
 export function createCenterControl(
   map: any,
   addMarkers: () => void,
   clusterizeMarkers: () => void,
-  toggleHeatmap: () => void
 ) {
   const controlButton = document.createElement('button')
 
@@ -48,140 +32,38 @@ export function createCenterControl(
   controlButton.style.fontFamily = "'Overpass', sans-serif"
   controlButton.style.fontSize = '16px'
   controlButton.style.lineHeight = '38px'
-  controlButton.style.margin = '8px 10px 22px'
+  controlButton.style.margin = '8px 20px 22px'
   controlButton.style.padding = '4px 20px 0 20px'
   controlButton.style.textAlign = 'center'
-  controlButton.className = controlButton.className + ' heatmap-button'
-  controlButton.textContent = 'Режим тепловой карты'
-  controlButton.title = 'Режим тепловой карты'
+  controlButton.className = controlButton.className + 'heatmap-button'
+  controlButton.textContent = 'Фильтры'
+  controlButton.title = 'Фильтры'
   controlButton.type = 'button'
 
   // Setup the click event listeners: simply set the map to Chicago.
   controlButton.addEventListener('click', () => {
-    toggleHeatmap()
-    toggleHeatMode(map, controlButton, addMarkers, clusterizeMarkers)
   })
 
   return controlButton
 }
+// markersData?: CashbackOfferCoordinatesType[]
 
-export function toggleHeatMode(
-  map: any,
-  controlButton: HTMLButtonElement,
-  addMarkers: () => void,
-  clusterizeMarkers: () => void
-) {
-  if (controlButton.title === 'Режим тепловой карты') {
-    controlButton.title = 'Режим просмотра зданий'
-    controlButton.innerHTML = 'Режим просмотра зданий'
-    markersToClusterize.forEach((marker: any) => {
-      // turn off markers and cluster
-      marker.setMap(null)
-      cluster.setMap(null)
-    })
-  } else {
-    controlButton.title = 'Режим тепловой карты'
-    controlButton.innerHTML = 'Режим тепловой карты'
-    addMarkers()
-    clusterizeMarkers()
-  }
+function parseMarkers(queryResults: any): CashbackOfferCoordinatesType[] {
+  console.log(queryResults)
+  return queryResults
 }
 
-export function getMarkerContent(body: ObjectCoordinatesType) {
-  const { iin, address, organization_object, organization_name, full_name, rating } = body.building
-  return `
-  <div class="mark">
-    <div class="mark__title">${address}</div>
-    <div class="mark__field-row">
-      <div class="mark__field">ИИН/БИН:</div>
-      <div class="mark__value">${iin}</div>
-    </div>
-    <div class="mark__field-row">
-      <div class="mark__field">Адрес:</div>
-      <div class="mark__value">${address}</div>
-    </div>
-    <div class="mark__field-row">
-      <div class="mark__field">Объект организации:</div>
-      <div class="mark__value">${
-        ObjectOfOrganizationOptionReverseMap[
-          organization_object as keyof typeof ObjectOfOrganizationOptionReverseMap
-        ]
-      }</div>
-    </div>
-    <div class="mark__field-row">
-      <div class="mark__field">Наименование организации:</div>
-      <div class="mark__value">${organization_name}</div>
-    </div>
-    <div class="mark__field-row">
-      <div class="mark__field">Собственник объекта:</div>
-      <div class="mark__value">${full_name}</div>
-    </div>
-    <div class="mark__field-row" style="color: ${
-      ratingColors[rating]
-    } !important; font-weight: 700">
-      <div class="mark__field">Уровень опасности объекта:</div>
-      <div class="mark__value" >${ratingDescriptionMap[rating]}</div>
-    </div> 
-    <div style="margin-top: 20px" class="mark__field">Почему этот объект имеет такой уровень опасности объекта?</div>
-    <div style="margin-top: 8px" class="mark__value">Уровень опасности объекта зависит от того, насколько собственник объекта заполнил свой Паспорт Пожарной Безопасности Объекта.</div>
-    <div style="margin-top: 8px; color: ${
-      ratingColors[rating]
-    } !important; font-weight: 500" class="mark__value">Заполненность Паспорта ПБО этого объекта: ${
-    ratingPercentages[rating]
-  }</div>
-  </div>
-  `
-}
 
-export function findMostFrequentAwTypeColor(markers: any[]) {
-  const count = {
-    Safe: 0,
-    Normal: 0,
-    Danger: 0
-  }
-
-  // Count the occurrences of each "targetElement.title" type
-  markers.forEach((marker: any) => {
-    switch (marker.targetElement.title) {
-      case 'Safe':
-        count['Safe']++
-        break
-      case 'Normal':
-        count['Normal']++
-        break
-      case 'Danger':
-        count['Danger']++
-        break
-    }
-  })
-
-  // Find the type with the maximum count
-  let mostFrequentType = 'Safe'
-  let maxCount = count['Safe']
-
-  for (const type in count) {
-    if (count[type as keyof typeof count] > maxCount) {
-      mostFrequentType = type
-      maxCount = count[type as keyof typeof count]
-    }
-  }
-
-  return ratingColors[
-    ratingTypes[mostFrequentType as keyof typeof ratingTypes] as keyof typeof ratingColors
-  ]
-}
 
 export async function useGoogleMaps(
   rootId: string,
   center: Coordinates,
-  markersData?: ObjectCoordinatesType[]
 ) {
   // @ts-expect-error cdn global object
   const { Map, InfoWindow } = await window.google.maps.importLibrary('maps')
   // @ts-expect-error cdn global object
   const { AdvancedMarkerElement } = await window.google.maps.importLibrary('marker')
 
-  const mapStore = useMapStore()
 
   let possibleAdresses: string[] = []
 
@@ -191,27 +73,12 @@ export async function useGoogleMaps(
     mapId: 'a65b6aab6aeb1170'
   })
 
-  if (markersData) {
-    // @ts-expect-error cdn global object
-    mappedData = markersData.map((marker) => new window.google.maps.LatLng(marker.lat, marker.lng))
-    // @ts-expect-error cdn global object
 
-    heatmap = new window.google.maps.visualization.HeatmapLayer({
-      data: mappedData,
-      map
-    })
-
-    toggleHeatmap()
-  }
-
-  function toggleHeatmap(): void {
-    heatmap.setMap(heatmap.getMap() ? null : map)
-  }
 
   // Create the DIV to hold the control.
   const centerControlDiv = document.createElement('div')
   // Create the control.
-  const centerControl = createCenterControl(map, addMarkers, clusterizeMarkers, toggleHeatmap)
+  const centerControl = createCenterControl(map, addMarkers, clusterizeMarkers)
   // Append the control to the DIV.
   centerControlDiv.appendChild(centerControl)
   // @ts-expect-error cdn global object
@@ -259,35 +126,6 @@ export async function useGoogleMaps(
     map.fitBounds(bounds)
   })
 
-  const allowClicking = () => {
-    map.addListener('click', async (mapMouseEvent: any) => {
-      if (currentMarker) {
-        currentMarker!.setMap(null)
-      }
-      currentMarker = new AdvancedMarkerElement({
-        position: mapMouseEvent.latLng,
-        map,
-        title: 'Click here'
-      })
-
-      const { data } = await axios.get<{
-        results: any[]
-      }>(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${mapMouseEvent.latLng.lat()},${mapMouseEvent.latLng.lng()}&key=${
-          import.meta.env.VITE_GOOGLE_MAPS_API
-        }`
-      )
-      possibleAdresses = data.results.map((item) => {
-        return item.formatted_address as string
-      })
-
-      mapStore.latLng = {
-        lat: mapMouseEvent.latLng.lat(),
-        lng: mapMouseEvent.latLng.lng()
-      }
-      mapStore.address = possibleAdresses[0]
-    })
-  }
 
   const placeOnUserLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -299,29 +137,50 @@ export async function useGoogleMaps(
     })
   }
 
-  function addMarkers() {
+
+  getMarkers(map, CategoriesMap[1])
+
+  async function getMarkers(category: $FixMe) {
+    const request = {
+      query: category,
+      fields: ["name", "geometry"],
+    };
+
+    const results = await mapService.getMarkers()
+
+    console.log(results)
+    addMarkers(parseMarkers(results))
+
+    return
+  }
+
+
+  function addMarkers(markersData: CashbackOfferCoordinatesType[]) {
     markersToClusterize = markersData!.map((mark) => {
-      const markerIcon = document.createElement('img')
-      markerIcon.width = 24
-      markerIcon.height = 24
-      markerIcon.src = getMarkerIcon(mark.building.rating)
+      const markerIcon = document.createElement('div')
+      markerIcon.style.width = '48px'
+      markerIcon.style.height = '48px'
+      markerIcon.style.display = 'flex'
+      markerIcon.style.alignItems = 'center'
+      markerIcon.style.justifyContent = 'center'
+      markerIcon.style.borderRadius = '50%'
+      markerIcon.style.backgroundColor = colors.EMERALD
+      markerIcon.style.padding = '4px'
+      markerIcon.style.fontWeight = '700'
+      markerIcon.style.color = colors.WHITE
+      markerIcon.innerHTML = `
+        <span>${mark.cashback_percentage}%</span>
+      `
 
       const marker = new AdvancedMarkerElement({
         position: mark,
         map,
-        title: getMarkerTitle(mark.building.rating),
+        title: 'Marker',
         content: markerIcon
       })
 
-      const infoWindow = new InfoWindow()
       marker.element.addEventListener('click', () => {
-        infoWindow.close()
-
-        infoWindow.setContent(getMarkerContent(mark))
-        infoWindow.open({
-          anchor: marker,
-          map
-        })
+        goToOffer(mark.category_id)
       })
       return marker
     })
@@ -340,8 +199,7 @@ export async function useGoogleMaps(
       const clusterIcon = document.createElement('div')
       clusterIcon.className = 'cluster-icon'
       clusterIcon.textContent = count.toString()
-      const color = findMostFrequentAwTypeColor(markers)
-      clusterIcon.style.border = `4px solid ${color}`
+      clusterIcon.style.border = `4px solid ${colors.EMERALD}`
       return new AdvancedMarkerElement({
         position,
         content: clusterIcon,
@@ -350,6 +208,12 @@ export async function useGoogleMaps(
         zIndex: Number(window.google.maps.Marker.MAX_ZINDEX) + count
       })
     }
+  }
+
+
+  // FIXME: make router push
+  const goToOffer = (category_id: number) => {
+
   }
 
   function clusterizeMarkers() {
@@ -364,7 +228,5 @@ export async function useGoogleMaps(
     addMarkers,
     placeOnUserLocation,
     clusterizeMarkers,
-    allowClicking
-    // heatMapToggle,
   }
 }
