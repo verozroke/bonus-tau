@@ -1,7 +1,5 @@
 <template>
-  <div>
-    recommendations
-  </div>
+  recommendations
 </template>
 
 <script

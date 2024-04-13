@@ -8,6 +8,7 @@
   <v-app>
     <v-main>
       <slot />
+      <BottomNavbar />
     </v-main>
   </v-app>
 </template>

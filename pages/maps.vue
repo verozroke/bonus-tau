@@ -1,7 +1,5 @@
 <template>
-  <div>
-    maps
-  </div>
+  maps
 </template>
 
 <script
