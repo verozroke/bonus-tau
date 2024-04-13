@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-
 class UserService {
   baseUrl: string
   constructor(baseUrl: string) {

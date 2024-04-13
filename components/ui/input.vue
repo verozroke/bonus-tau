@@ -14,21 +14,18 @@
   ></v-text-field>
 </template>
 
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 const model = defineModel()
 
 defineProps<{
-  label: string,
-  placeholder?: string,
+  label: string
+  placeholder?: string
   prependIcon?: string
   type: string
-  rules?: any[],
+  rules?: any[]
   disabled?: boolean
   loading?: boolean
-  counter?: number,
+  counter?: number
 }>()
 </script>
 

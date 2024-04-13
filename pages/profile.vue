@@ -2,11 +2,11 @@
   <link
     rel="stylesheet"
     href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css"
-  >
+  />
   <link
     rel="stylesheet"
     href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
-  >
+  />
   <main class="profile-page">
     <section class="relative block h-500-px">
       <div class="absolute top-0 w-full h-full bg-center bg-cover">
@@ -41,7 +41,9 @@
     </section>
     <section class="relative py-16 bg-blueGray-200">
       <div class="container mx-auto px-4">
-        <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+        <div
+          class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64"
+        >
           <div class="px-6">
             <div class="flex flex-wrap justify-center">
               <div class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
@@ -53,12 +55,10 @@
                 />
               </div>
               <div class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
-                <div class="py-6 px-3 mt-32 sm:mt-0">
-                </div>
+                <div class="py-6 px-3 mt-32 sm:mt-0"></div>
               </div>
               <div class="w-full lg:w-4/12 px-4 lg:order-1">
-                <div class="flex justify-center py-4 lg:pt-4 pt-8">
-                </div>
+                <div class="flex justify-center py-4 lg:pt-4 pt-8"></div>
               </div>
             </div>
             <div class="text-center mt-12">
@@ -82,14 +82,10 @@
   </main>
 </template>
 
-<script
-  setup
-  lang="ts"
->
-import { colors } from '~/core/color/color';
+<script setup lang="ts">
+import { colors } from '~/core/color/color'
 
 // const formattedCreatedAt = computed(() => formatDate(userStore.user ? userStore.user.createdAt : new Date()))
-
 
 // onMounted(async () => {
 // await userStore.getUser()
@@ -97,8 +93,6 @@ import { colors } from '~/core/color/color';
 useHead({
   title: 'Профиль | Bonastau'
 })
-
-
 </script>
 
 <style scoped></style>

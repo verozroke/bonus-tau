@@ -6,5 +6,3 @@ export type Card = {
   bank: string
   user_id: string
 }
-
-

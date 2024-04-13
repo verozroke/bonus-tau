@@ -1,5 +1,4 @@
-import { defineStore } from 'pinia';
-
+import { defineStore } from 'pinia'
 
 export type ToastColor = '#28B0A6' | '#FA126C' | '#3c4dff'
 
@@ -9,7 +8,11 @@ export const useToastStore = defineStore('ToastStore', () => {
   const message = ref<string>('')
   const timeout = ref<number>(2000)
 
-  const openSnackbar = (messageValue: string, timeoutValue: number = 2000, colorValue: ToastColor) => {
+  const openSnackbar = (
+    messageValue: string,
+    timeoutValue: number = 2000,
+    colorValue: ToastColor
+  ) => {
     timeout.value = timeoutValue
     message.value = messageValue
     color.value = colorValue
@@ -31,5 +34,5 @@ export const useToastStore = defineStore('ToastStore', () => {
     timeout,
     openSnackbar,
     setToDefault
-  };
-});
+  }
+})

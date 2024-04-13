@@ -5,10 +5,7 @@
   ></div>
 </template>
 
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 defineProps<{
   rootId: string
 }>()

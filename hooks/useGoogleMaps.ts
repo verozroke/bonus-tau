@@ -1,9 +1,13 @@
 import axios from 'axios'
 import { colors } from '~/core/color/color'
 import type { CashbackOfferCoordinatesType, Coordinates } from '~/core/types/map'
-import { CategoriesCashbackPercentage, CategoriesMap, CategoriesReverseMap } from '~/core/constants/constants'
-import { mapService } from './../services/map.service';
-import { routerKey } from 'vue-router';
+import {
+  CategoriesCashbackPercentage,
+  CategoriesMap,
+  CategoriesReverseMap
+} from '~/core/constants/constants'
+import { mapService } from './../services/map.service'
+import { routerKey } from 'vue-router'
 
 export function getMarkerIcon() {
   return `/marks/.png`
@@ -13,12 +17,9 @@ let markersToClusterize: any
 let cluster: any
 let mappedData: any[]
 // @ts-expect-error cdn global object
-let service: window.google.maps.places.PlacesService;
+let service: window.google.maps.places.PlacesService
 
-
-export function createCenterControl(
-  map: any,
-) {
+export function createCenterControl(map: any) {
   const controlButton = document.createElement('button')
 
   // Set CSS for the control.
@@ -40,8 +41,7 @@ export function createCenterControl(
   controlButton.type = 'button'
 
   // Setup the click event listeners: simply set the map to Chicago.
-  controlButton.addEventListener('click', () => {
-  })
+  controlButton.addEventListener('click', () => {})
 
   return controlButton
 }
@@ -50,26 +50,21 @@ export function createCenterControl(
 function parseMarkers(queryResults: any, category: string): CashbackOfferCoordinatesType[] {
   const parsedMarkers: CashbackOfferCoordinatesType[] = queryResults.map((location: any) => {
     return {
-      cashback_percentage: CategoriesCashbackPercentage[category as keyof typeof CategoriesCashbackPercentage],
+      cashback_percentage:
+        CategoriesCashbackPercentage[category as keyof typeof CategoriesCashbackPercentage],
       category_id: CategoriesReverseMap[category as keyof typeof CategoriesReverseMap],
       lat: location.geometry.location.lat(),
-      lng: location.geometry.location.lng(),
+      lng: location.geometry.location.lng()
     }
   })
   return parsedMarkers
 }
 
-
-
-export async function useGoogleMaps(
-  rootId: string,
-  center: Coordinates,
-) {
+export async function useGoogleMaps(rootId: string, center: Coordinates) {
   // @ts-expect-error cdn global object
   const { Map, InfoWindow } = await window.google.maps.importLibrary('maps')
   // @ts-expect-error cdn global object
   const { AdvancedMarkerElement } = await window.google.maps.importLibrary('marker')
-
 
   let possibleAdresses: string[] = []
 
@@ -78,8 +73,6 @@ export async function useGoogleMaps(
     zoom: 15,
     mapId: 'a65b6aab6aeb1170'
   })
-
-
 
   // Create the DIV to hold the control.
   const centerControlDiv = document.createElement('div')
@@ -132,7 +125,6 @@ export async function useGoogleMaps(
     map.fitBounds(bounds)
   })
 
-
   const placeOnUserLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       const centerOfTheMap = {
@@ -143,23 +135,22 @@ export async function useGoogleMaps(
     })
   }
 
-
   getMarkers(CategoriesMap[1])
 
   async function getMarkers(category: $FixMe) {
     // @ts-expect-error cdn global object
-    var pyrmont = new window.google.maps.LatLng(51.08, 71.26);
+    var pyrmont = new window.google.maps.LatLng(51.08, 71.26)
 
     var request = {
       location: pyrmont,
       radius: '5000',
       query: 'restaurant'
-    };
+    }
 
     // @ts-expect-error cdn global object
 
-    service = new window.google.maps.places.PlacesService(map);
-    service.textSearch(request, callback);
+    service = new window.google.maps.places.PlacesService(map)
+    service.textSearch(request, callback)
 
     function callback(results: any, status: any) {
       // @ts-expect-error cdn global object
@@ -169,9 +160,6 @@ export async function useGoogleMaps(
       }
     }
   }
-
-
-
 
   function addMarkers(markersData: CashbackOfferCoordinatesType[]) {
     markersToClusterize = markersData!.map((mark) => {
@@ -230,7 +218,6 @@ export async function useGoogleMaps(
     }
   }
 
-
   const goToOffer = (category_id: number) => {
     window.location.pathname = '/recommendations/' + category_id
   }
@@ -246,6 +233,6 @@ export async function useGoogleMaps(
   return {
     addMarkers,
     placeOnUserLocation,
-    clusterizeMarkers,
+    clusterizeMarkers
   }
 }

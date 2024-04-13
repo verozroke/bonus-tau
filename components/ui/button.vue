@@ -10,18 +10,13 @@
   </v-btn>
 </template>
 
-<script
-  setup
-  lang="ts"
->
-
+<script setup lang="ts">
 defineProps<{
-  color: string,
-  textColor?: string,
-  width?: string,
-  mode: 'elevated' | 'tonal' | 'outlined',
+  color: string
+  textColor?: string
+  width?: string
+  mode: 'elevated' | 'tonal' | 'outlined'
 }>()
-
 </script>
 
 <style scoped></style>

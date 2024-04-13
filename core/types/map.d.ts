@@ -3,10 +3,7 @@ export type Coordinates = {
   lng: number
 }
 
-
 export type CashbackOfferCoordinatesType = {
   cashback_percentage: number
   category_id: number
 } & Coordinates
-
-

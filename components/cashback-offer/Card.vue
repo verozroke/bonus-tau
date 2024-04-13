@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative h-[235px] rounded-2xl w-[910px]  py-5 shadow-md"
+    class="relative h-[235px] rounded-2xl w-[910px] py-5 shadow-md"
     :style="{
       backgroundColor: bankColor,
       color: bankTextColor
@@ -19,7 +19,9 @@
             @click="isCardNumberOpen = !isCardNumberOpen"
             v-ripple
             class="font-semibold text-4xl -mb-1"
-          >{{ cardNumber }}</p>
+          >
+            {{ cardNumber }}
+          </p>
         </div>
         <p class="font-bold text-8xl -mb-3">{{ cashbackOffer.cashback_percentage }}%</p>
       </div>
@@ -27,26 +29,27 @@
   </div>
 </template>
 
-<script
-  setup
-  lang="ts"
->
-import { bankColorMap, bankTextColorMap } from '~/core/color/color';
-import type { CashbackOffer } from '~/core/types/cashback-offer';
+<script setup lang="ts">
+import { bankColorMap, bankTextColorMap } from '~/core/color/color'
+import type { CashbackOffer } from '~/core/types/cashback-offer'
 
 const props = defineProps<{
   cashbackOffer: CashbackOffer
 }>()
 
-const bankColor = computed(() => bankColorMap[props.cashbackOffer.bank as keyof typeof bankColorMap])
-const bankTextColor = computed(() => bankTextColorMap[props.cashbackOffer.bank as keyof typeof bankColorMap])
-
+const bankColor = computed(
+  () => bankColorMap[props.cashbackOffer.bank as keyof typeof bankColorMap]
+)
+const bankTextColor = computed(
+  () => bankTextColorMap[props.cashbackOffer.bank as keyof typeof bankColorMap]
+)
 
 const isCardNumberOpen = ref(false)
-const cardNumber = computed(() => isCardNumberOpen.value ? props.cashbackOffer.card_number : '**** ' + props.cashbackOffer.card_number.split(' ')[3])
-
-
-
+const cardNumber = computed(() =>
+  isCardNumberOpen.value
+    ? props.cashbackOffer.card_number
+    : '**** ' + props.cashbackOffer.card_number.split(' ')[3]
+)
 </script>
 
 <style scoped></style>

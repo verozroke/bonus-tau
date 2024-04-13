@@ -18,7 +18,7 @@
           variant="outlined"
         ></v-select>
         <UiInput
-          label='Номер карты'
+          label="Номер карты"
           v-model="cardNumber"
           :rules="cardNumberRules"
           :counter="16"
@@ -26,14 +26,14 @@
           type="text"
         />
         <UiInput
-          label='Имя владельца'
+          label="Имя владельца"
           v-model="ownerName"
           :rules="ownerNameRules"
           placeholder="Введите имя владельца карты."
           type="text"
         />
         <UiInput
-          label='Срок действия'
+          label="Срок действия"
           v-model="expireDate"
           :rules="expireDateRules"
           :counter="5"
@@ -50,7 +50,8 @@
           prepend-icon="mdi-credit-card-plus"
           :disabled="isLoading"
           stacked
-        >Создать карту</v-btn>
+          >Создать карту</v-btn
+        >
         <v-btn
           :disabled="isLoading"
           style="width: 50%"
@@ -58,19 +59,17 @@
           :color="colors.RED"
           prepend-icon="mdi-cancel"
           stacked
-        >Отмена</v-btn>
+          >Отмена</v-btn
+        >
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
-<script
-  lang="ts"
-  setup
->
+<script lang="ts" setup>
 import { useToast } from '~/hooks/useToast'
 import { ref, toRefs } from 'vue'
-import { colors } from '~/core/color/color';
+import { colors } from '~/core/color/color'
 
 const { toast } = useToast()
 
@@ -102,28 +101,30 @@ const resetForm = () => {
 const ownerNameRules = ref([
   (v: any) => !!v || 'Имя владельца карты обязательно',
   (v: any) => {
-    const nameParts = v.split(' ');
-    return nameParts.length === 2 ? true : 'Имя владельца карты должно состоять из двух слов';
+    const nameParts = v.split(' ')
+    return nameParts.length === 2 ? true : 'Имя владельца карты должно состоять из двух слов'
   }
-]);
-
+])
 
 const cardNumberRules = ref([
   (v: string) => !!v || 'Номер карты обязателен',
   (v: string) => {
-    const cardNumberPattern = /^\d{16}$/; // Match the pattern for exactly 16 digits
-    return v.match(cardNumberPattern) ? true : 'Неверный формат номера кредитной карты (требуется 16 цифр)';
+    const cardNumberPattern = /^\d{16}$/ // Match the pattern for exactly 16 digits
+    return v.match(cardNumberPattern)
+      ? true
+      : 'Неверный формат номера кредитной карты (требуется 16 цифр)'
   }
-]);
+])
 
 const expireDateRules = ref([
   (v: any) => !!v || 'Дата истечения срока действия обязательна',
   (v: any) => {
-    const expireDatePattern = /^(0[1-9]|1[0-2])\/\d{2}$/; // Проверка на шаблон XX/XX
-    return v.match(expireDatePattern) ? true : 'Неверный формат даты истечения срока действия (должен быть XX/XX)';
+    const expireDatePattern = /^(0[1-9]|1[0-2])\/\d{2}$/ // Проверка на шаблон XX/XX
+    return v.match(expireDatePattern)
+      ? true
+      : 'Неверный формат даты истечения срока действия (должен быть XX/XX)'
   }
-]);
-
+])
 
 const createCard = () => {
   try {
@@ -138,11 +139,6 @@ const createCard = () => {
     isLoading.value = false
   }
 }
-
-
 </script>
 
-<style
-  lang="scss"
-  scoped
-></style>
+<style lang="scss" scoped></style>

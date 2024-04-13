@@ -1,13 +1,11 @@
-import { useToastStore } from "~/stores/ToastStore"
-import { notificationColors } from "~/core/color/color"
+import { useToastStore } from '~/stores/ToastStore'
+import { notificationColors } from '~/core/color/color'
 export type ToastOptions = {
-  message: string,
+  message: string
   timeout?: number
 }
 
-
 export const useToast = () => {
-
   const toastStore = useToastStore()
 
   const toast = {

@@ -1,8 +1,4 @@
-<script
-  setup
-  lang="ts"
->
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <v-app>
@@ -12,6 +8,5 @@
     </v-main>
   </v-app>
 </template>
-
 
 <style scoped></style>

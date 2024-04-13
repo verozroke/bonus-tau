@@ -5,9 +5,12 @@
     width="auto"
   >
     <v-card style="padding: 40px">
-      <v-card-title class="text-center"><b>Вы уверены что хотите удалить данную карту?</b></v-card-title>
-      <v-card-text class="text-center">Напишите <b>"УДАЛИТЬ"</b> если вы уверены что хотите удалить данную
-        карту</v-card-text>
+      <v-card-title class="text-center"
+        ><b>Вы уверены что хотите удалить данную карту?</b></v-card-title
+      >
+      <v-card-text class="text-center"
+        >Напишите <b>"УДАЛИТЬ"</b> если вы уверены что хотите удалить данную карту</v-card-text
+      >
       <v-text-field
         v-model="textInput"
         @input="checkDeleteStatus"
@@ -22,7 +25,8 @@
           prepend-icon="mdi-delete"
           :disabled="isDeleteButtonDisabled || isLoading"
           stacked
-        >Подтвердить удаление</v-btn>
+          >Подтвердить удаление</v-btn
+        >
         <v-btn
           :disabled="isLoading"
           style="width: 50%"
@@ -30,16 +34,14 @@
           color="#d20f0d"
           prepend-icon="mdi-cancel"
           stacked
-        >Отмена</v-btn>
+          >Отмена</v-btn
+        >
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
-<script
-  lang="ts"
-  setup
->
+<script lang="ts" setup>
 import { useToast } from '~/hooks/useToast'
 import { ref, toRefs } from 'vue'
 
@@ -80,7 +82,4 @@ const checkDeleteStatus = () => {
 }
 </script>
 
-<style
-  lang="scss"
-  scoped
-></style>
+<style lang="scss" scoped></style>

@@ -3,8 +3,7 @@ import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
 
-
-export default defineNuxtPlugin(nuxtApp => {
+export default defineNuxtPlugin((nuxtApp) => {
   const vuetify = createVuetify({
     ssr: false,
     components,
@@ -13,9 +12,9 @@ export default defineNuxtPlugin(nuxtApp => {
       defaultSet: 'mdi',
       aliases,
       sets: {
-        mdi,
-      },
-    },
+        mdi
+      }
+    }
   })
 
   nuxtApp.vueApp.use(vuetify)

@@ -12,10 +12,7 @@
   </div>
 </template>
 
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { useGoogleMaps } from '@/hooks/useGoogleMaps'
 import type { CashbackOfferCoordinatesType } from '~/core/types/map'
@@ -29,10 +26,10 @@ onMounted(async () => {
   try {
     // isLoading.value = true
 
-    const { clusterizeMarkers, placeOnUserLocation } = await useGoogleMaps(
-      'map',
-      { lng: 71.43051762734937, lat: 51.12842004128779 }
-    )
+    const { clusterizeMarkers, placeOnUserLocation } = await useGoogleMaps('map', {
+      lng: 71.43051762734937,
+      lat: 51.12842004128779
+    })
 
     placeOnUserLocation()
     // isLoading.value = false

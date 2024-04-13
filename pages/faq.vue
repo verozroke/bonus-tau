@@ -9,11 +9,17 @@
           :key="item.id"
         >
           <v-expansion-panel-title
-            style="font-size: 24px; font-weight: bold; padding: 25px 16px; background-color: #f1f5f9;"
-          >{{
-            item.question
-          }}</v-expansion-panel-title>
-          <v-expansion-panel-text style="padding: 20px 20px 10px 20px; font-size: 18px; background-color: #f1f5f9;">
+            style="
+              font-size: 24px;
+              font-weight: bold;
+              padding: 25px 16px;
+              background-color: #f1f5f9;
+            "
+            >{{ item.question }}</v-expansion-panel-title
+          >
+          <v-expansion-panel-text
+            style="padding: 20px 20px 10px 20px; font-size: 18px; background-color: #f1f5f9"
+          >
             <span><b>Ответ:</b></span> <br />
             <br />
             {{ item.answer }}
@@ -24,41 +30,35 @@
   </div>
 </template>
 
-<script
-  setup
-  lang="ts"
->
-import type { Question } from '~/core/types/question';
+<script setup lang="ts">
+import type { Question } from '~/core/types/question'
 
-
-const questions = ref<Question[]>(
-  [
-    {
-      id: 1,
-      question: "Какие банки предлагают кэшбэк?",
-      answer: "Список банков, предоставляющих кэшбэк, может варьироваться в зависимости от условий и региона. Однако, некоторые известные банки, предлагающие кэшбэк, включают Сбербанк, Альфа-Банк, Тинькофф и другие."
-    },
-    {
-      id: 2,
-      question: "Как работает система кэшбэк?",
-      answer: "Кэшбэк - это программа вознаграждения, которая позволяет пользователям получать часть потраченных средств обратно на свой счет. Пользователи могут зарабатывать кэшбэк путем совершения покупок с использованием кредитных или дебетовых карт, связанных с программой кэшбэк."
-    },
-    {
-      id: 3,
-      question: "Как узнать о доступных кэшбэк предложениях?",
-      answer: "Чтобы узнать о доступных кэшбэк предложениях, можно использовать специальные сервисы и приложения, которые собирают информацию о текущих акциях и предложениях от различных банков и платежных систем."
-    },
-  ]
-)
+const questions = ref<Question[]>([
+  {
+    id: 1,
+    question: 'Какие банки предлагают кэшбэк?',
+    answer:
+      'Список банков, предоставляющих кэшбэк, может варьироваться в зависимости от условий и региона. Однако, некоторые известные банки, предлагающие кэшбэк, включают Сбербанк, Альфа-Банк, Тинькофф и другие.'
+  },
+  {
+    id: 2,
+    question: 'Как работает система кэшбэк?',
+    answer:
+      'Кэшбэк - это программа вознаграждения, которая позволяет пользователям получать часть потраченных средств обратно на свой счет. Пользователи могут зарабатывать кэшбэк путем совершения покупок с использованием кредитных или дебетовых карт, связанных с программой кэшбэк.'
+  },
+  {
+    id: 3,
+    question: 'Как узнать о доступных кэшбэк предложениях?',
+    answer:
+      'Чтобы узнать о доступных кэшбэк предложениях, можно использовать специальные сервисы и приложения, которые собирают информацию о текущих акциях и предложениях от различных банков и платежных систем.'
+  }
+])
 useHead({
   title: 'FAQ | Bonastau'
 })
 </script>
 
-<style
-  lang="scss"
-  scoped
->
+<style lang="scss" scoped>
 .faq-body {
   font-family: 'Overpass', sans-serif;
   padding: 50px 70px;
@@ -96,7 +96,8 @@ useHead({
     margin-bottom: 10px;
   }
 
-  &__question {}
+  &__question {
+  }
 }
 
 @media only screen and (max-width: 789px) {

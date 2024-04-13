@@ -9,12 +9,14 @@ class MapService {
   }
 
   async getMarkers(query: string): Promise<CashbackOfferCoordinatesType[]> {
-    const { data } = await axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?location=42.3675294%2C-71.186966&query=${query}&radius=5000&key=${'AIzaSyBAX1pmERCOfG1TewmZvOviBNt0b-Vsl0g'}`,
+    const { data } = await axios.get(
+      `https://maps.googleapis.com/maps/api/place/textsearch/json?location=42.3675294%2C-71.186966&query=${query}&radius=5000&key=${'AIzaSyBAX1pmERCOfG1TewmZvOviBNt0b-Vsl0g'}`,
       {
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         }
-      })
+      }
+    )
     console.log(data)
     return data
   }

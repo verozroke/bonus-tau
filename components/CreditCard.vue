@@ -1,7 +1,7 @@
 <template>
   <div
     @click.self="isDeleteDialogOpen = true"
-    class="relative h-[250px] w-100 rounded-2xl  py-8 shadow-md"
+    class="relative h-[250px] w-100 rounded-2xl py-8 shadow-md"
     :style="{
       backgroundColor: bankColor,
       color: bankTextColor
@@ -20,7 +20,9 @@
             @click="isCardNumberOpen = !isCardNumberOpen"
             v-ripple
             class="tracking-more-wider font-semibold text-4xl"
-          >{{ cardNumber }}</p>
+          >
+            {{ cardNumber }}
+          </p>
         </div>
         <p class="font-bold text-4xl">{{ card.bank }}</p>
       </div>
@@ -36,7 +38,9 @@
               @click="isExpireDateOpen = !isExpireDateOpen"
               v-ripple
               class="text-lg font-semibold tracking-widest"
-            >{{ expireDate }}</p>
+            >
+              {{ expireDate }}
+            </p>
           </div>
         </div>
       </div>
@@ -44,12 +48,9 @@
   </div>
 </template>
 
-<script
-  setup
-  lang="ts"
->
-import { bankColorMap, bankTextColorMap } from '~/core/color/color';
-import type { Card } from '~/core/types/card';
+<script setup lang="ts">
+import { bankColorMap, bankTextColorMap } from '~/core/color/color'
+import type { Card } from '~/core/types/card'
 
 const props = defineProps<{
   card: Card
@@ -61,10 +62,12 @@ const bankColor = computed(() => bankColorMap[props.card.bank as keyof typeof ba
 const bankTextColor = computed(() => bankTextColorMap[props.card.bank as keyof typeof bankColorMap])
 
 const isCardNumberOpen = ref(false)
-const cardNumber = computed(() => isCardNumberOpen.value ? props.card.card_number : '**** ' + props.card.card_number.split(' ')[3])
+const cardNumber = computed(() =>
+  isCardNumberOpen.value ? props.card.card_number : '**** ' + props.card.card_number.split(' ')[3]
+)
 
 const isExpireDateOpen = ref(false)
-const expireDate = computed(() => isExpireDateOpen.value ? props.card.expire_date : '**/**')
+const expireDate = computed(() => (isExpireDateOpen.value ? props.card.expire_date : '**/**'))
 </script>
 
 <style scoped></style>

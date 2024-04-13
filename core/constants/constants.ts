@@ -5,13 +5,13 @@ export const CategoriesMap = {
 }
 
 export const CategoriesReverseMap = {
-  'Продукты': 1,
-  'Медицина': 2,
-  'Рестораны': 3
+  Продукты: 1,
+  Медицина: 2,
+  Рестораны: 3
 }
 
 export const CategoriesCashbackPercentage = {
-  'Продукты': 5,
-  'Медицина': 5,
-  'Рестораны': 5
+  Продукты: 5,
+  Медицина: 5,
+  Рестораны: 5
 }

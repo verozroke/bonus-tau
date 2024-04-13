@@ -44,24 +44,19 @@
   </v-card>
 </template>
 
-<script
-  setup
-  lang="ts"
->
-import { useRouter } from 'vue-router';
-import { ref } from 'vue';
+<script setup lang="ts">
+import { useRouter } from 'vue-router'
+import { ref } from 'vue'
 
 const router = useRouter()
 
 const categories = ref([
   { text: 'Продукты', id: 1, icon: 'mdi-basket' },
   { text: 'Медицина', id: 2, icon: 'mdi-medical-bag' },
-  { text: 'Рестораны', id: 3, icon: 'mdi-pasta' },
+  { text: 'Рестораны', id: 3, icon: 'mdi-pasta' }
 ])
 
-const sponsors = ref([
-  { text: 'Magnum', id: 4, icon: 'mdi-store' },
-])
+const sponsors = ref([{ text: 'Magnum', id: 4, icon: 'mdi-store' }])
 
 const goTo = (item: any) => {
   router.push(`/recommendations/${item.id}`)

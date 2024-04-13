@@ -5,14 +5,18 @@
     class="flex flex-col w-[400px]"
   >
     <h3 class="text-3xl text-black font-bold mb-2">C возвращением.</h3>
-    <h5 class="text-sm text-slate-600">Нету аккаунта? <span
+    <h5 class="text-sm text-slate-600">
+      Нету аккаунта?
+      <span
         @click="() => router.push('/register')"
         class="underline cursor-pointer underline-offset-2"
-      >Создать аккаунт.</span></h5>
+        >Создать аккаунт.</span
+      >
+    </h5>
 
     <div class="flex w-full flex-col py-4 gap-1">
       <UiInput
-        label='Номер телефона'
+        label="Номер телефона"
         v-model="number"
         :rules="phoneRules"
         :counter="20"
@@ -20,36 +24,36 @@
         type="text"
       />
       <UiInput
-        label='Пароль'
+        label="Пароль"
         v-model="password"
         :rules="passwordRules"
         placeholder="Введите пароль."
         type="text"
       />
     </div>
-    <div class="flex justify-end w-full -mt-4"> <span
+    <div class="flex justify-end w-full -mt-4">
+      <span
         ripple
         class="text-sm text-slate-600 underline cursor-pointer underline-offset-2"
-      >Забыли пароль?</span></div>
+        >Забыли пароль?</span
+      >
+    </div>
     <div class="flex justify-end">
       <UiButton
         class="mt-3"
         type="submit"
-        mode='elevated'
+        mode="elevated"
         :color="colors.INDIGO"
         :text-color="colors.WHITE"
-      >Войти
+        >Войти
       </UiButton>
     </div>
   </v-form>
 </template>
 
-<script
-  setup
-  lang="ts"
->
-import { useRouter } from 'vue-router';
-import { colors } from '~/core/color/color';
+<script setup lang="ts">
+import { useRouter } from 'vue-router'
+import { colors } from '~/core/color/color'
 
 const router = useRouter()
 const loginForm = ref(null)
@@ -69,10 +73,7 @@ const resetForm = () => {
   loginForm.value?.reset()
 }
 
-const onLogin = async () => {
-}
-
-
+const onLogin = async () => {}
 
 const phoneRules = ref([
   (v: any) => !!v || 'Номер телефона обязателен',
