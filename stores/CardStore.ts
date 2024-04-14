@@ -20,10 +20,16 @@ export const useCardStore = defineStore('CardStore', () => {
     cards.value = cards.value.filter((card) => card.id !== id)
   }
 
+  const getOffers = async (categoryId: number) => {
+    const data = await cardService.getOffers(categoryId)
+    return data
+  }
+
   return {
     cards,
     createCard,
     getCards,
-    deleteCard
+    deleteCard,
+    getOffers
   }
 })

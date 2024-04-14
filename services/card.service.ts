@@ -1,5 +1,6 @@
 import type { User } from '@/core/types/user'
 import axios from 'axios'
+import { offersData } from './../core/constants/data/offers';
 
 export type CardCreatePayload = {
   number: string
@@ -46,6 +47,12 @@ class CardService {
       }
     })
     return 'SUCCESS'
+  }
+
+
+
+  async getOffers(id: number) {
+    return offersData[id as keyof typeof offersData]
   }
 }
 
