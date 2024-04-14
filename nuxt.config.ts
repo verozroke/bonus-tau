@@ -30,13 +30,13 @@ export default defineNuxtConfig({
   },
   pwa: {
     manifest: {
-      "name": "BonusTau",
-      "short_name": "BonusTau",
-      "theme_color": "#6366f1",
-      "background_color": "#6366f1",
-      "display": "standalone",
-      "scope": "/",
-      "start_url": "/",
+      name: 'BonusTau',
+      short_name: 'BonusTau',
+      theme_color: '#6366f1',
+      background_color: '#6366f1',
+      display: 'standalone',
+      scope: '/',
+      start_url: '/',
       icons: [
         {
           src: '/logo-512.png',

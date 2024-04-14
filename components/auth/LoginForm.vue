@@ -10,7 +10,8 @@
       <span
         @click="() => router.push('/register')"
         class="underline cursor-pointer underline-offset-2"
-      >Создать аккаунт.</span>
+        >Создать аккаунт.</span
+      >
     </h5>
 
     <div class="flex w-full flex-col py-4 gap-1">
@@ -34,7 +35,8 @@
       <span
         ripple
         class="text-sm text-slate-600 underline cursor-pointer underline-offset-2"
-      >Забыли пароль?</span>
+        >Забыли пароль?</span
+      >
     </div>
     <div class="flex justify-end">
       <UiButton
@@ -43,20 +45,17 @@
         mode="elevated"
         :color="colors.INDIGO"
         :text-color="colors.WHITE"
-      >Войти
+        >Войти
       </UiButton>
     </div>
   </v-form>
 </template>
 
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { colors } from '~/core/color/color'
-import { useToast } from '~/hooks/useToast';
-import { authService, type LoginValidator } from '~/services/auth.service';
+import { useToast } from '~/hooks/useToast'
+import { authService, type LoginValidator } from '~/services/auth.service'
 
 const router = useRouter()
 const userStore = useUserStore()

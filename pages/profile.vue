@@ -41,7 +41,9 @@
     </section>
     <section class="relative py-16 bg-blueGray-200">
       <div class="container mx-auto px-4">
-        <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+        <div
+          class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64"
+        >
           <div class="px-6">
             <div class="flex flex-wrap justify-center">
               <div class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
@@ -61,7 +63,9 @@
             </div>
             <div class="text-center mt-12">
               <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
-                {{ userStore.user ? userStore.user.name + ' ' + userStore.user.surname : 'Your name' }}
+                {{
+                  userStore.user ? userStore.user.name + ' ' + userStore.user.surname : 'Your name'
+                }}
               </h3>
               <LogoutButton />
             </div>
@@ -75,10 +79,7 @@
   </main>
 </template>
 
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 import { colors } from '~/core/color/color'
 
 const userStore = useUserStore()
@@ -93,8 +94,6 @@ onMounted(async () => {
 useHead({
   title: 'Профиль | Bonastau'
 })
-
-
 </script>
 
 <style scoped></style>

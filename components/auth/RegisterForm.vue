@@ -10,7 +10,8 @@
       <span
         @click="() => router.push('/login')"
         class="underline cursor-pointer underline-offset-2"
-      >Войти.</span>
+        >Войти.</span
+      >
     </h5>
     <div class="flex w-full flex-col py-4 gap-1">
       <UiInput
@@ -64,14 +65,11 @@
   </v-form>
 </template>
 
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { colors } from '~/core/color/color'
-import { useToast } from '~/hooks/useToast';
-import { authService, type RegisterValidator } from '~/services/auth.service';
+import { useToast } from '~/hooks/useToast'
+import { authService, type RegisterValidator } from '~/services/auth.service'
 
 const router = useRouter()
 const userStore = useUserStore()
@@ -103,7 +101,7 @@ const onRegister = async () => {
     surname: surname.value
   }
 
-  if (await isValid() && password.value === repeatPassword.value) {
+  if ((await isValid()) && password.value === repeatPassword.value) {
     try {
       isLoading.value = true
       const message = await authService.register(body)

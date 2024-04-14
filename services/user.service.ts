@@ -16,7 +16,6 @@ class UserService {
 
     return 'Пользователь был обновлен.'
   }
-
 }
 
 export const userService = new UserService('http://localhost:8000')

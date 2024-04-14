@@ -6,7 +6,6 @@ export type LoginValidator = {
   password: string
 }
 
-
 export type RegisterValidator = {
   name: string
   surname: string
@@ -14,7 +13,6 @@ export type RegisterValidator = {
   password: string
   password2: string
 }
-
 
 class AuthService {
   baseUrl: string
@@ -26,8 +24,8 @@ class AuthService {
     console.log(body)
     const { data } = await axios.post(`${this.baseUrl}/api/v1/login/`, body, {
       headers: {
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
     localStorage.setItem('token', data.access)
     return 'Авторизация прошла успешно.'
@@ -47,7 +45,6 @@ class AuthService {
     localStorage.removeItem('token')
   }
 
-
   async getUser(): Promise<User> {
     const token = localStorage.getItem('token')!
     const { data } = await axios.get(`${this.baseUrl}/api/v1/user/me/`, {
@@ -59,8 +56,6 @@ class AuthService {
 
     return data
   }
-
-
 }
 
 export const authService = new AuthService('http://localhost:8000')

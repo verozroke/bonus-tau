@@ -12,10 +12,7 @@
   </div>
 </template>
 
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { useGoogleMaps } from '@/hooks/useGoogleMaps'
 import type { CashbackOfferCoordinatesType } from '~/core/types/map'

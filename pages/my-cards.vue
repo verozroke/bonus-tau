@@ -28,10 +28,7 @@
   </div>
 </template>
 
-<script
-  setup
-  lang="ts"
->
+<script setup lang="ts">
 import { colors } from '~/core/color/color'
 import type { Card } from '~/core/types/card'
 
@@ -50,10 +47,7 @@ onMounted(async () => {
 })
 </script>
 
-<style
-  lang="scss"
-  scoped
->
+<style lang="scss" scoped>
 .add-button {
   position: fixed;
   z-index: 999;

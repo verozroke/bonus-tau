@@ -17,7 +17,7 @@ export const useCardStore = defineStore('CardStore', () => {
 
   const deleteCard = async (id: number) => {
     await cardService.deleteCard(id)
-    cards.value = cards.value.filter(card => card.id !== id)
+    cards.value = cards.value.filter((card) => card.id !== id)
   }
 
   return {

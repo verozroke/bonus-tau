@@ -12,7 +12,6 @@ export const useUserStore = defineStore('userStore', () => {
   const router = useRouter()
   const { toast } = useToast()
 
-
   const getUser = async () => {
     if (!localStorage.getItem('token')) {
       router.push('/login')
@@ -43,13 +42,10 @@ export const useUserStore = defineStore('userStore', () => {
 
   const isAuthenticated = ref(false)
 
-
-
-
   return {
     isAuthenticated,
     user,
     getUser,
-    logout,
+    logout
   }
 })
