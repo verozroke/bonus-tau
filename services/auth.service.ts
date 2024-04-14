@@ -23,10 +23,11 @@ class AuthService {
   }
 
   async login(body: LoginValidator): Promise<string> {
+    console.log(body)
     const { data } = await axios.post(`${this.baseUrl}/api/v1/login/`, body, {
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     })
     localStorage.setItem('token', data.access)
     return 'Авторизация прошла успешно.'
@@ -62,4 +63,4 @@ class AuthService {
 
 }
 
-export const authService = new AuthService(import.meta.env.VITE_BACKEND_URL)
+export const authService = new AuthService('http://localhost:8000')

@@ -95,6 +95,7 @@ const onLogin = async () => {
       toast.success({ message })
     } catch (e) {
       isLoading.value = false
+      console.error(e)
       toast.error({ message: 'Не удалось войти.' })
     }
   } else {
@@ -112,7 +113,7 @@ const phoneRules = ref([
 
 const passwordRules = ref([
   (v: any) => !!v || 'Пароль обязателен',
-  (v: any) => (v && v.length >= 1) || 'Пароль должен быть более чем 8 символов',
+  (v: any) => (v && v.length >= 1) || 'Пароль должен быть более чем 1 символов',
   (v: any) => (v && v.length <= 20) || 'Пароль должен быть менее чем 20 символов'
 ])
 </script>
