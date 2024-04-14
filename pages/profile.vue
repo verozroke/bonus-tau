@@ -61,8 +61,7 @@
             </div>
             <div class="text-center mt-12">
               <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
-                <!-- userStore.user?.nickname ? userStore.user.nickname -->
-                {{ 'Такаев Асхат' }}
+                {{ userStore.user ? userStore.user.name + ' ' + userStore.user.surname : 'Your name' }}
               </h3>
               <LogoutButton />
             </div>

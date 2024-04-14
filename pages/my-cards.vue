@@ -20,7 +20,7 @@
     >
       <CreditCard
         v-ripple
-        v-for="card in cards"
+        v-for="card in cardStore.cards"
         :key="card.id"
         :card="card"
       />
@@ -35,29 +35,7 @@
 import { colors } from '~/core/color/color'
 import type { Card } from '~/core/types/card'
 
-const cards = ref<Card[]>([
-  {
-    id: 1,
-    number: '1234 5678 9012 3456',
-    usage_date: '12/24',
-    bank_title: 'Halyk Bank',
-    owner_id: 1
-  },
-  {
-    id: 2,
-    number: '9876 5432 1098 7654',
-    usage_date: '05/23',
-    bank_title: 'Jusan Bank',
-    owner_id: 1
-  },
-  {
-    id: 3,
-    number: '2468 1357 8024 6913',
-    usage_date: '09/25',
-    bank_title: 'Kaspi Bank',
-    owner_id: 1
-  }
-])
+const cardStore = useCardStore()
 
 const isDialogOpen = ref(false)
 
@@ -68,6 +46,7 @@ useHead({
 const userStore = useUserStore()
 onMounted(async () => {
   await userStore.getUser()
+  await cardStore.getCards()
 })
 </script>
 

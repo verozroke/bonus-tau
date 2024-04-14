@@ -16,7 +16,7 @@ const userStore = useUserStore()
 onMounted(async () => {
   await userStore.getUser()
   if (localStorage.getItem('token')) {
-    router.push({ name: 'Map' })
+    router.push('/my-cards')
     return
   }
 })

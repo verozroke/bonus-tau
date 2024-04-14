@@ -30,8 +30,8 @@
         <div class="flex flex-wrap gap-10">
           <div>
             <p class="font-normal">Имя владельца</p>
-            <p class="font-semibold tracking-widest uppercase">{{ toLatin(userStore.user!.surname +
-      userStore.user!.name) }}</p>
+            <p class="font-semibold tracking-widest uppercase">{{ userStore.user ? toLatin(userStore.user.surname + ' '
+      + userStore.user.name) : '' }}</p>
           </div>
           <div class="">
             <p class="text-base font-normal">Срок действия</p>
@@ -69,7 +69,8 @@ const bankTextColor = computed(() => bankTextColorMap[props.card.bank_title as k
 
 const isCardNumberOpen = ref(false)
 const cardNumber = computed(() =>
-  isCardNumberOpen.value ? props.card.number : '**** ' + props.card.number.split(' ')[3]
+  isCardNumberOpen.value ? props.card.number : '**** ' + props.card.number.slice(12, 16)
+
 )
 
 const isExpireDateOpen = ref(false)

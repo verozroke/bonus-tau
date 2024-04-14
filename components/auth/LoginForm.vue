@@ -91,7 +91,7 @@ const onLogin = async () => {
       userStore.isAuthenticated = true
       isLoading.value = false
       resetForm()
-      router.push('/login')
+      router.push('/')
       toast.success({ message })
     } catch (e) {
       isLoading.value = false

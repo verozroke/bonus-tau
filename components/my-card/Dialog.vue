@@ -50,8 +50,7 @@
           prepend-icon="mdi-credit-card-plus"
           :disabled="isLoading"
           stacked
-          >Создать карту</v-btn
-        >
+        >Создать карту</v-btn>
         <v-btn
           :disabled="isLoading"
           style="width: 50%"
@@ -59,17 +58,21 @@
           :color="colors.RED"
           prepend-icon="mdi-cancel"
           stacked
-          >Отмена</v-btn
-        >
+        >Отмена</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
-<script lang="ts" setup>
+<script
+  lang="ts"
+  setup
+>
 import { useToast } from '~/hooks/useToast'
 import { ref, toRefs } from 'vue'
 import { colors } from '~/core/color/color'
+import type { Card } from '~/core/types/card';
+import type { CardCreatePayload } from '~/services/card.service';
 
 const { toast } = useToast()
 
@@ -81,7 +84,7 @@ const isLoading = ref(false)
 const emit = defineEmits(['close'])
 
 const { isDialogOpen } = toRefs(props)
-
+const cardStore = useCardStore()
 const cardNumber = ref('')
 const ownerName = ref('')
 const expireDate = ref('')
@@ -126,19 +129,29 @@ const expireDateRules = ref([
   }
 ])
 
-const createCard = () => {
+const createCard = async () => {
+  const body: CardCreatePayload = {
+    bank_title: bank.value,
+    number: cardNumber.value,
+    usage_date: expireDate.value,
+    card_type: 'Visa MasterCard'
+  }
+
   try {
     isLoading.value = true
-    cardStore.createCard()
-    toast.success({ message: 'Карта успешно удалена.' })
+    await cardStore.createCard(body)
+    toast.success({ message: 'Карта успешно создана.' })
     emit('close')
     isLoading.value = false
   } catch (error) {
-    toast.error({ message: 'Не удалось удалить вашу карту.' })
+    toast.error({ message: 'Не удалось создать вашу карту.' })
 
     isLoading.value = false
   }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style
+  lang="scss"
+  scoped
+></style>

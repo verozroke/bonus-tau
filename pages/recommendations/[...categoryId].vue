@@ -24,11 +24,12 @@
   setup
   lang="ts"
 >
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { CategoriesMap } from '~/core/constants/constants'
 import type { CashbackOffer } from '~/core/types/cashback-offer'
 
 const route = useRoute()
+const router = useRouter()
 const userStore = useUserStore()
 
 const offers = ref<CashbackOffer[]>([
@@ -64,6 +65,9 @@ useHead({
 
 onMounted(async () => {
   await userStore.getUser()
+  if (!route.params.categoryId[0]) {
+    router.push('/recommendations/1')
+  }
 })
 </script>
 
