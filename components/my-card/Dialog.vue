@@ -13,7 +13,7 @@
         <!-- SELECT -->
         <v-select
           label="Банк"
-          :items="['Halyk Bank', 'Jusan Bank', 'Kaspi Bank']"
+          :items="['Halyk Bank', 'Home bank', 'Kaspi Bank']"
           v-model="bank"
           variant="outlined"
         ></v-select>
@@ -50,8 +50,7 @@
           prepend-icon="mdi-credit-card-plus"
           :disabled="isLoading"
           stacked
-          >Создать карту</v-btn
-        >
+        >Создать карту</v-btn>
         <v-btn
           :disabled="isLoading"
           style="width: 50%"
@@ -59,14 +58,16 @@
           :color="colors.RED"
           prepend-icon="mdi-cancel"
           stacked
-          >Отмена</v-btn
-        >
+        >Отмена</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
-<script lang="ts" setup>
+<script
+  lang="ts"
+  setup
+>
 import { useToast } from '~/hooks/useToast'
 import { ref, toRefs } from 'vue'
 import { colors } from '~/core/color/color'
@@ -150,4 +151,7 @@ const createCard = async () => {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style
+  lang="scss"
+  scoped
+></style>

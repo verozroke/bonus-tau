@@ -73,3 +73,14 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+Backend:
+
+pip install -r requirements.txt
+
+cd bonus_tau_backend
+
+py manage.py makemigrations auths
+py manage.py makemigrations cards
+py manage.py migrate
+py manage.py runserver
